@@ -1,32 +1,23 @@
-# 📧 Email Spam Detection System (Machine Learning)
+import streamlit as st
+import joblib
 
-## 🚀 Overview
-This project detects whether an email/message is spam or not using Machine Learning and Natural Language Processing (NLP).
+# Load model
+model = joblib.load("spam_model.pkl")
+vectorizer = joblib.load("vectorizer.pkl")
 
----
+st.title("📧 Email Spam Detection System")
+st.write("Detect whether a message is Spam or Not using Machine Learning (NLP + TF-IDF).")
 
-## 🛠️ Tech Stack
-- Python
-- Pandas
-- Scikit-learn
-- NLP (Text Processing)
+msg = st.text_area("Enter Email Message")
 
----
+if st.button("Predict"):
+    if msg.strip() == "":
+        st.warning("Please enter a message")
+    else:
+        data = vectorizer.transform([msg])
+        prediction = model.predict(data)
 
-## 🤖 Algorithm Used
-- Naive Bayes Classifier
-
----
-
-## 📊 Features
-- Text preprocessing
-- Feature extraction using CountVectorizer
-- Spam classification model
-- Accuracy evaluation
-
----
-
-## 🚀 How to Run
-```bash
-pip install -r requirements.txt
-python spam.py
+        if prediction[0] == 1:
+            st.error("🚨 Spam Message")
+        else:
+            st.success("✅ Not Spam")
