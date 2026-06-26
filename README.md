@@ -1,23 +1,19 @@
 # 📧 Email Spam Detection System
 
 ## 🚀 Overview
-This project classifies emails/messages as SPAM or NOT SPAM using Machine Learning.
+Machine Learning project that classifies messages as Spam or Not Spam using NLP techniques.
 
----
-
-## 🛠️ Tech Stack
+## 🧠 Tech Stack
 - Python
-- Pandas
 - Scikit-learn
+- TF-IDF Vectorizer
+- Naive Bayes
+- Streamlit
 
----
-
-## 🤖 Model Used
-- Naive Bayes Classifier
-
----
-
-## 📊 Features
+## ⚙️ How to Run
+```bash
+python model.py
+streamlit run app.py
 - Text preprocessing
 - Feature extraction using CountVectorizer
 - Spam classification
