@@ -1,7 +1,7 @@
-# 🎓 Student Performance Prediction
+# 📧 Email Spam Detection System
 
 ## 🚀 Overview
-This project predicts student marks based on study hours using Machine Learning.
+This project classifies emails/messages as SPAM or NOT SPAM using Machine Learning.
 
 ---
 
@@ -12,8 +12,16 @@ This project predicts student marks based on study hours using Machine Learning.
 
 ---
 
-## 📊 Model
-- Linear Regression
+## 🤖 Model Used
+- Naive Bayes Classifier
+
+---
+
+## 📊 Features
+- Text preprocessing
+- Feature extraction using CountVectorizer
+- Spam classification
+- Model training & testing
 
 ---
 
