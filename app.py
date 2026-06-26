@@ -1,23 +1,37 @@
 import streamlit as st
-import joblib
+import pandas as pd
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.naive_bayes import MultinomialNB
 
-# Load model
-model = joblib.load("spam_model.pkl")
-vectorizer = joblib.load("vectorizer.pkl")
+st.title("📧 Email Spam Detector")
 
-st.title("📧 Email Spam Detection System")
-st.write("Detect whether a message is Spam or Not using Machine Learning (NLP + TF-IDF).")
+data = {
+    "text": [
+        "Win money now",
+        "Hello friend",
+        "Free offer claim now",
+        "Meeting tomorrow"
+    ],
+    "label": [1, 0, 1, 0]
+}
 
-msg = st.text_area("Enter Email Message")
+df = pd.DataFrame(data)
+
+vectorizer = TfidfVectorizer()
+X = vectorizer.fit_transform(df["text"])
+y = df["label"]
+
+model = MultinomialNB()
+model.fit(X, y)
+
+msg = st.text_area("Enter message")
 
 if st.button("Predict"):
-    if msg.strip() == "":
-        st.warning("Please enter a message")
-    else:
-        data = vectorizer.transform([msg])
-        prediction = model.predict(data)
+    if msg:
+        X_input = vectorizer.transform([msg])
+        pred = model.predict(X_input)
 
-        if prediction[0] == 1:
-            st.error("🚨 Spam Message")
+        if pred[0] == 1:
+            st.error("🚨 Spam")
         else:
             st.success("✅ Not Spam")
